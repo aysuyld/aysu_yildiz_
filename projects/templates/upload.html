@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitki Hastalığı Tahmini</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: #e8f5e9;
+            min-height: 100vh;
+            color: #333;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        .upload-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px dashed #4CAF50;
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            text-align: center;
+            margin: 20px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .upload-label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #2E7D32;
+            cursor: pointer;
+        }
+        .upload-input {
+            display: none; 
+        }
+        .upload-box:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-color: #45a049;
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .btn-submit:hover {
+            background-color: #45a049;
+            border-color: #45a049;
+        }
+        .image-preview {
+            display: none;
+            margin: 20px auto;
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .leaves {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        #image-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        h1 {
+            color: #2E7D32;
+            margin-bottom: 15px;
+        }
+
+        .lead {
+            color: #388E3C;
+            margin-bottom: 25px;
+        }
+
+        .leaf {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% {
+                transform: translate(0, -10%) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(100px, 1000%) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .projects-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    
+        .projects-button:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            color: white;
+            text-decoration: none;
+        }
+    
+        @media (max-width: 768px) {
+            .projects-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                top: 10px;
+                left: 10px;
+            }
+        }
+        
+        .home-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(76, 175, 80, 0.9);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+        }
+    
+        .home-button:hover {
+            background-color: #2b2320;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+    
+        @media (max-width: 768px) {
+            .home-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="home" class="projects-button">
+        <i class="fas fa-arrow-left"></i>
+        Projeler
+    </a>
+    <a href="/" class="home-button">
+        <i class="fas fa-home"></i>
+        Anasayfa
+    </a>
+
+    <!-- Yaprak efekti için div -->
+    <div class="leaves" id="leaves"></div>
+
+    <div class="container">
+        <h1>Bitki Hastalığı Tahmini</h1>
+        <p class="lead">Lütfen yaprak görüntüsünü yükleyin.</p>
+        
+        <form method="POST" enctype="multipart/form-data" class="mt-4">
+            {% csrf_token %}
+            <div class="form-group">
+                <div class="upload-box">
+                    <label for="image-upload" class="upload-label">Görüntü Yükle</label>
+                    <input type="file" id="image-upload" name="image" class="upload-input" onchange="previewImage(event)" accept="image/*" />
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-submit">Tahmin Et</button>
+        </form>
+
+        <!-- Yüklenen görüntüyü göstermek için bir alan -->
+        <div id="image-container">
+            <img id="image-preview" class="image-preview" src="" alt="" />
+        </div>
+    </div>
+
+    <!-- Bootstrap JS ve bağımlılıkları -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Görüntü önizlemesi
+        function previewImage(event) {
+            var reader = new FileReader();
+            var imagePreview = document.getElementById('image-preview');
+            
+            reader.onload = function() {
+                imagePreview.src = reader.result;
+                imagePreview.style.display = 'block';
+            };
+            
+            if(event.target.files[0]) {
+                reader.readAsDataURL(event.target.files[0]);
+            } else {
+                imagePreview.style.display = 'none';
+            }
+        }
+
+        // Yaprak efekti için yeni JavaScript
+        function createLeaves() {
+            const leavesContainer = document.getElementById('leaves');
+            const numberOfLeaves = 50;
+
+            // Canlı yaprak renkleri
+            const leafColors = [
+                '#4CAF50', // Yeşil
+                '#8BC34A', // Açık yeşil
+                '#689F38', // Orta yeşil
+                '#33691E', // Koyu yeşil
+                '#7CB342', // Çimen yeşili
+                '#558B2F'  // Zeytin yeşili
+            ];
+
+            for (let i = 0; i < numberOfLeaves; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'leaf';
+                
+                // Rastgele pozisyon
+                leaf.style.left = Math.random() * 100 + 'vw';
+                leaf.style.top = Math.random() * 100 + 'vh';
+                
+                // Rastgele boyut (biraz daha büyük yapraklar)
+                const size = Math.random() * 20 + 15;
+                leaf.style.width = size + 'px';
+                leaf.style.height = size + 'px';
+                
+                // Rastgele animasyon süresi
+                const animationDuration = Math.random() * 15 + 10;
+                leaf.style.animationDuration = animationDuration + 's';
+                
+                // Rastgele gecikme
+                const animationDelay = Math.random() * 5;
+                leaf.style.animationDelay = animationDelay + 's';
+                
+                // Rastgele renk seçimi
+                const randomColor = leafColors[Math.floor(Math.random() * leafColors.length)];
+                leaf.style.backgroundColor = randomColor;
+                // Yapraklara hafif transparanlık ekle
+                leaf.style.opacity = '0.8';
+                
+                // Gölge efekti
+                leaf.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+                
+                leavesContainer.appendChild(leaf);
+            }
+        }
+        // Sayfa yüklendiğinde yaprakları oluştur
+        window.addEventListener('load', createLeaves);
+    </script>
+</body>
+</html>

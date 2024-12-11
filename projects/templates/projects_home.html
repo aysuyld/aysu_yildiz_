@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projelerim</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% load static %}
+    <style>
+        body {
+            background: url('{% static "images/background.jpg" %}') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .home-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(74, 60, 57, 0.9);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+        }
+    
+        .home-button:hover {
+            background-color: #2b2320;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+    
+        @media (max-width: 768px) {
+            .home-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                top: 10px;
+                right: 10px;
+            }
+        }
+
+        .projects-card {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 900px;
+            width: 100%;
+            padding: 40px;
+            margin: 20px;
+        }
+
+        .page-title {
+            color: #1a1615;
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .project-item {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .project-title {
+            color: #2b2320;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .project-description {
+            color: #4a3c39;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .tech-stack {
+            margin-bottom: 15px;
+        }
+
+        .tech-tag {
+            display: inline-block;
+            background: rgba(74, 60, 57, 0.9);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-links a {
+            color: #4a3c39;
+            margin-right: 20px;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .project-links a:hover {
+            color: #2b2320;
+        }
+
+        .back-button {
+            background-color: #4a3c39;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .back-button:hover {
+            background-color: #2b2320;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            color: white;
+        }
+
+        .return-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(74, 60, 57, 0.9);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    
+        .return-button:hover {
+            background-color: #388E3C;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            color: white;
+            text-decoration: none;
+        }
+    
+        @media (max-width: 768px) {
+            .return-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                top: 10px;
+                left: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="return-button">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+
+    <a href="/" class="home-button">
+        <i class="fas fa-home"></i>
+        Anasayfa
+    </a>
+
+    <div class="projects-card">
+        <h1 class="page-title">Projelerim</h1>
+
+        <!-- Proje 1 -->
+        <div class="project-item">
+            <h2 class="project-title">Bitki Hastalığı Tespit Sistemi</h2>
+            <p class="project-description">
+                Derin öğrenme teknikleri kullanarak bitki yapraklarındaki hastalıkları tespit eden 
+                bir web uygulaması. Sistem, yüklenen yaprak görüntülerini analiz ederek hastalık 
+                tespiti yapabilmektedir.
+            </p>
+            <div class="tech-stack">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">TensorFlow</span>
+                <span class="tech-tag">Django</span>
+            </div>
+            <div class="project-links">
+                <a href="prediction"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+        </div>
+
+        <!-- Proje 2 -->
+        <div class="project-item">
+            <h2 class="project-title">Proje 2</h2>
+            <p class="project-description">
+                Proje açıklaması buraya gelecek...
+            </p>
+            <div class="tech-stack">
+                <span class="tech-tag">Teknoloji 1</span>
+                <span class="tech-tag">Teknoloji 2</span>
+            </div>
+            <div class="project-links">
+                <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+        </div>
+
+        <!-- Proje 3 -->
+        <div class="project-item">
+            <h2 class="project-title">Proje 3</h2>
+            <p class="project-description">
+                Proje açıklaması buraya gelecek...
+            </p>
+            <div class="tech-stack">
+                <span class="tech-tag">Teknoloji 1</span>
+                <span class="tech-tag">Teknoloji 2</span>
+            </div>
+            <div class="project-links">
+                <a href="#"><i class="fab fa-github"></i> GitHub</a>
+                <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

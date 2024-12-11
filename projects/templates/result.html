@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tahmin Sonucu</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #e8f5e9;
+            min-height: 100vh;
+            color: #333;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            background-color: rgba(255, 255, 255, 0.6);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            width: 90%;
+            max-width: 500px;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        .result-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px dashed #4CAF50;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .result-box:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-color: #45a049;
+            transform: translateY(-2px);
+        }
+
+        h1 {
+            color: #2E7D32;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+
+        .lead {
+            color: #388E3C;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .prediction-text {
+            color: #1B5E20;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            font-size: 1.1rem;
+        }
+
+        .btn-submit:hover {
+            background-color: #45a049;
+            border-color: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .leaves {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .leaf {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translate(0, -10%) rotate(0deg);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(100px, 1000%) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="leaves" id="leaves"></div>
+
+    <div class="container">
+        <h1>Tahmin Sonucu</h1>
+        <div class="result-box">
+            <p class="lead">Tahmin Edilen Sınıf:</p>
+            <div class="prediction-text">{{ prediction }}</div>
+            <a href="{% url 'upload_image' %}" class="btn btn-submit">Başka Bir Görüntü Yükle</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS ve bağımlılıkları -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function createLeaves() {
+            const leavesContainer = document.getElementById('leaves');
+            const numberOfLeaves = 50;
+            const leafColors = [
+                '#4CAF50', '#8BC34A', '#689F38', 
+                '#33691E', '#7CB342', '#558B2F'
+            ];
+
+            for (let i = 0; i < numberOfLeaves; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'leaf';
+                
+                leaf.style.left = Math.random() * 100 + 'vw';
+                leaf.style.top = Math.random() * 100 + 'vh';
+                
+                const size = Math.random() * 20 + 15;
+                leaf.style.width = size + 'px';
+                leaf.style.height = size + 'px';
+                
+                const animationDuration = Math.random() * 15 + 10;
+                leaf.style.animationDuration = animationDuration + 's';
+                
+                const animationDelay = Math.random() * 5;
+                leaf.style.animationDelay = animationDelay + 's';
+                
+                const randomColor = leafColors[Math.floor(Math.random() * leafColors.length)];
+                leaf.style.backgroundColor = randomColor;
+                leaf.style.opacity = '0.8';
+                
+                leaf.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
+                
+                leavesContainer.appendChild(leaf);
+            }
+        }
+
+        window.addEventListener('load', createLeaves);
+    </script>
+</body>
+</html>
