@@ -47,7 +47,7 @@ def leaf_disease(request):
     return render(request, 'upload.html', {'form': form})
 
 # Hugging Face sentiment analizi modeli
-sentiment_pipeline = pipeline("sentiment-analysis")
+sentiment_pipeline = pipeline("sentiment-analysis", model="distilbert-base-uncased")
 
 class SentimentAnalysisView(APIView):
     def post(self, request):
