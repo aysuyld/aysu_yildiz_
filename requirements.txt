@@ -7,3 +7,4 @@ tensorflow
 pillow
 opencv-python
 tf-keras
+djangorestframework
