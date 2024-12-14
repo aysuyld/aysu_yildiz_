@@ -147,9 +147,9 @@
             height: 100vh;
             width: 100%;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            scroll-snap-align: start;
+            position: relative;
         }
 
         .scroll-container {
@@ -158,11 +158,21 @@
         }
 
         #about {
-            background-color: #6B4F44; /* Biraz daha koyu kahverengi */
+            background-color: #6B4F44;
+            padding: 40px 20px;
+            overflow-y: auto; /* İçerik fazlaysa kaydırma ekler */
+            scrollbar-width: none; /* Firefox için kaydırma çubuğunu gizler */
+            -ms-overflow-style: none; /* IE ve Edge için kaydırma çubuğunu gizler */
+        }
+
+        #about::-webkit-scrollbar {
+            display: none; /* Chrome, Safari ve Opera için kaydırma çubuğunu gizler */
         }
 
         .about-content {
-            max-width: 800px;
+            max-width: 1000px; /* Genişletilmiş maksimum genişlik */
+            width: 90%;
+            margin: 40px auto;
             padding: 40px;
             background-color: rgba(232, 225, 217, 0.1);
             border-radius: 20px;
@@ -182,6 +192,8 @@
             font-family: 'Playfair Display', serif;
             line-height: 1.8;
             text-align: justify;
+            font-size: 1.1rem; /* Yazı boyutu artırıldı */
+            margin-bottom: 30px;
         }
     </style>
 </head>
@@ -210,7 +222,7 @@
         <!-- Hakkımda section -->
         <section id="about" class="page-section">
             <div class="about-content">
-                <h2 class="about-title">Hakkımda</h2>
+                <h2 class="section-title">Hakkımda</h2>
                 <p class="about-text">
                     Merhaba! Adım Aysu Yıldız, Kütahya Dumlupınar Üniversitesi Bilgisayar 
                     Mühendisliği mezunuyum. Python dilini kullanarak veri organize etme, 
