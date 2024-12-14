@@ -24,13 +24,13 @@
         }
 
         #home {
-            background-color: #E8D8C4; /* Koyu krem */
-            color: #8B6B61; /* Açık kahverengi */
+            background-color: #E8D8C4;
+            color: #8B6B61;
         }
 
         #about {
-            background-color: #E8D8C4; /* Koyu krem */
-            color: #8B6B61; /* Açık kahverengi */
+            background-color: #E8D8C4;
+            color: #8B6B61;
             padding: 40px 20px;
         }
 
@@ -41,7 +41,7 @@
             width: 100%;
             max-width: 1200px;
             padding: 0 50px;
-            margin-top: 100px;
+            margin-top: 150px; /* Navigasyon butonlarıyla mesafeyi artırdım */
         }
 
         .content-left {
@@ -64,8 +64,8 @@
         }
 
         .profile-image {
-            width: 400px;
-            height: 400px;
+            width: 350px; /* Fotoğraf boyutunu küçülttüm */
+            height: 350px; /* Fotoğraf boyutunu küçülttüm */
             border-radius: 50%;
             object-fit: cover;
             border: 8px solid #8B6B61;
@@ -97,8 +97,12 @@
             top: 40px;
             transform: translateX(-50%);
             display: flex;
-            gap: 20px;
+            gap: 25px; /* Butonlar arası mesafeyi artırdım */
             z-index: 1000;
+            background-color: rgba(232, 216, 196, 0.9); /* Navigasyon arka planı */
+            padding: 15px 30px;
+            border-radius: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .nav-btn {
@@ -125,9 +129,10 @@
             width: 90%;
             margin: 40px auto;
             padding: 40px;
-            background-color: rgba(139, 107, 97, 0.1);
+            background-color: #D4BFA7; /* Hakkımda arkaplan rengini koyulaştırdım */
             border-radius: 20px;
             backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .about-title {
@@ -160,8 +165,8 @@
             }
 
             .profile-image {
-                width: 300px;
-                height: 300px;
+                width: 250px; /* Mobilde daha küçük */
+                height: 250px;
             }
 
             .name-title {
@@ -170,6 +175,16 @@
 
             .role-title {
                 font-size: 2rem;
+            }
+
+            .nav-buttons {
+                padding: 10px 20px;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
             }
         }
     </style>
