@@ -29,7 +29,7 @@
         }
 
         #about {
-            background-color: #E8D8C4;
+            background-color: #b6a48e; /* Açık pembe tonu */
             color: #8B6B61;
             padding: 40px 20px;
         }
@@ -69,26 +69,6 @@
             border-radius: 50%;
             object-fit: cover;
             border: 8px solid #8B6B61;
-        }
-
-        .lets-talk-btn {
-            background-color: #8B6B61;
-            color: #E8D8C4;
-            padding: 15px 40px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            display: inline-block;
-            margin-top: 20px;
-        }
-
-        .lets-talk-btn:hover {
-            background-color: #6B4F44;
-            transform: translateY(-2px);
-            color: #E8D8C4;
-            text-decoration: none;
         }
 
         .nav-buttons {
@@ -213,6 +193,69 @@
         .text-center {
             text-align: center;
         }
+
+        .contact-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .lets-talk-text {
+            color: #8B6B61;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: moveText 1.5s ease-in-out infinite;
+        }
+        
+        .arrow {
+            display: inline-block;
+        }
+        
+        @keyframes moveText {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(10px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        
+        .mail-btn {
+            background-color: #8B6B61;
+            color: #E8D8C4;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .mail-btn:hover {
+            background-color: #6B4F44;
+            transform: translateY(-2px);
+            color: #E8D8C4;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -227,8 +270,17 @@
         <div class="main-container">
             <div class="content-left">
                 <h1 class="name-title">I'm Aysu Yıldız</h1>
-                <h2 class="role-title">Python Developer</h2>
-                <a href="#" class="lets-talk-btn">Contact me</a>
+                <h2 class="role-title">Data Engineer</h2>
+                <div class="contact-wrapper">
+                    <div class="lets-talk-text">
+                        Contact Me
+                        <span class="arrow">→</span>
+                    </div>
+                    <a href="mailto:contact@aysuyildiz.com" class="mail-btn">
+                        <i class="fas fa-envelope"></i>
+                        <span>aysu.yildiz361@gmail.com</span>
+                    </a>
+                </div>
             </div>
             <div class="content-right">
                 <img src="{% static 'images/profile.jpg' %}" alt="Aysu Yıldız" class="profile-image">
