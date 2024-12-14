@@ -41,7 +41,7 @@
             width: 100%;
             max-width: 1200px;
             padding: 0 50px;
-            margin-top: 350px; /* 150px'den 250px'e çıkardım */
+            margin-top: 300px; /* 150px'den 250px'e çıkardım */
         }
 
         .content-left {
@@ -64,8 +64,8 @@
         }
 
         .profile-image {
-            width: 350px; /* Fotoğraf boyutunu küçülttüm */
-            height: 350px; /* Fotoğraf boyutunu küçülttüm */
+            width: 300px; /* Fotoğraf boyutunu küçülttüm */
+            height: 300px; /* Fotoğraf boyutunu küçülttüm */
             border-radius: 50%;
             object-fit: cover;
             border: 8px solid #8B6B61;
@@ -187,6 +187,32 @@
                 font-size: 0.9rem;
             }
         }
+
+        .cv-download-btn {
+            background-color: #8B6B61;
+            color: #E8D8C4;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 30px;
+            border: none;
+        }
+        
+        .cv-download-btn:hover {
+            background-color: #6B4F44;
+            transform: translateY(-2px);
+            color: #E8D8C4;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .text-center {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -202,7 +228,7 @@
             <div class="content-left">
                 <h1 class="name-title">I'm Aysu Yıldız</h1>
                 <h2 class="role-title">Python Developer</h2>
-                <a href="#" class="lets-talk-btn">Let's Talk</a>
+                <a href="#" class="lets-talk-btn">Contact me</a>
             </div>
             <div class="content-right">
                 <img src="{% static 'images/profile.jpg' %}" alt="Aysu Yıldız" class="profile-image">
@@ -212,21 +238,21 @@
 
     <section id="about" class="page-section">
         <div class="about-content">
-            <h2 class="about-title">Hakkımda</h2>
-            <p class="about-text">
-                Merhaba! Adım Aysu Yıldız, Kütahya Dumlupınar Üniversitesi Bilgisayar 
-                Mühendisliği mezunuyum. Python dilini kullanarak veri organize etme, 
-                analiz etme ve modelleme konularında deneyimliyim. Son 
-                zamanlarda aldığım sertifikalı eğitimlerle Doğal Dil İşleme (NLP), 
-                TensorFlow ve Makine Öğrenimi gibi alanlarda uzmanlaştım. Datathon 
-                ve Kaggle gibi platformlarda yarışmalara katıldım ve pratik deneyim 
-                kazandım. Bu süreçte Yaprak Hastalığı Tespiti, Müşteri 
-                Kaybetme Tahmini ve Ev Fiyat Tahmini gibi projeler gerçekleştirdim. 
-                FastAPI, Flask platformlarıyla çalışarak çeşitli altyapı 
-                becerileri edindim. SQL ile veritabanı yönetimi ve veri analizinde güçlü 
-                bir uzmanlığa sahibim. Takım çalışmasına yatkın, problem çözme 
-                yeteneği yüksek ve sürekli öğrenmeye istekliyim.
+            <h3 class="who-title">Who am i?</h3>
+            <h2 class="about-heading">I'm Aysu Yıldız, a Python Developer and Data Scientist.</h2>
+            <p class="about-text"> 
+                Experienced in organizing, analyzing, and modeling data using Python. Recently specialized in areas such as Natural Language Processing (NLP), 
+                TensorFlow, and Machine Learning through certified training programs. Participated in competitions on platforms like Datathon and Kaggle, 
+                gaining hands-on experience. During this process, completed projects such as Leaf Disease Detection, Customer Churn Prediction, 
+                and House Price Prediction. Acquired various infrastructure skills by working with platforms like FastAPI and Flask. 
+                Experienced in database management and data analysis using SQL. Adaptable to teamwork, highly skilled in problem-solving, and eager to learn.
             </p>
+            <div class="text-center">
+                <a href="{% static 'cv/Cv_Aysu_Yildiz.pdf' %}" download class="cv-download-btn">
+                    <i class="fas fa-download me-2"></i>
+                    Download my CV
+                </a>
+            </div>
         </div>
     </section>
 
