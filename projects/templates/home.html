@@ -166,6 +166,10 @@
                 padding: 8px 15px;
                 font-size: 0.9rem;
             }
+            .experience-container {
+                flex-direction: column;
+                padding: 20px;
+            }
         }
 
         .cv-download-btn {
@@ -356,6 +360,74 @@
                 gap: 20px;
             }
         }
+
+        #experience {
+            background-color: #E8D8C4;
+            color: #8B6B61;
+            padding: 40px 20px;
+        }
+        
+        .experience-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 50px;
+            padding: 40px;
+        }
+        
+        .column {
+            flex: 1;
+            background-color: rgba(139, 107, 97, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .column-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: #8B6B61;
+            margin-bottom: 30px;
+            text-align: center;
+            border-bottom: 2px solid #8B6B61;
+            padding-bottom: 10px;
+        }
+        
+        .timeline-item {
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid #8B6B61;
+        }
+        
+        .timeline-date {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #6B4F44;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .timeline-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #8B6B61;
+            margin-bottom: 10px;
+        }
+        
+        .timeline-subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #8B6B61;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        
+        .timeline-description {
+            font-size: 0.95rem;
+            color: #8B6B61;
+            line-height: 1.6;
+        }
     </style>
 </head>
 <body>
@@ -413,6 +485,65 @@
                     <i class="fas fa-download me-2"></i>
                     Download my CV
                 </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="page-section">
+        <div class="experience-container">
+            <!-- Eğitim Sütunu -->
+            <div class="column">
+                <h2 class="column-title">Education</h2>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2019 - 2023</div>
+                    <div class="timeline-title">Computer Engineering</div>
+                    <div class="timeline-subtitle">Sakarya University</div>
+                    <div class="timeline-description">
+                        Bachelor's degree in Computer Engineering with focus on software development and data science.
+                        GPA: 3.45/4.00
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <div class="timeline-date">2023</div>
+                    <div class="timeline-title">Data Science Bootcamp</div>
+                    <div class="timeline-subtitle">Miuul</div>
+                    <div class="timeline-description">
+                        Comprehensive training in data science, machine learning, and artificial intelligence.
+                    </div>
+                </div>
+    
+                <!-- Diğer eğitimler buraya eklenebilir -->
+            </div>
+    
+            <!-- İş Deneyimi Sütunu -->
+            <div class="column">
+                <h2 class="column-title">Experience</h2>
+                
+                <div class="timeline-item">
+                    <div class="timeline-date">2023 - Present</div>
+                    <div class="timeline-title">Data Engineer</div>
+                    <div class="timeline-subtitle">Company Name</div>
+                    <div class="timeline-description">
+                        - Developed and maintained data pipelines using Python and SQL
+                        - Implemented machine learning models for predictive analytics
+                        - Collaborated with cross-functional teams on various projects
+                    </div>
+                </div>
+    
+                <div class="timeline-item">
+                    <div class="timeline-date">2022 - 2023</div>
+                    <div class="timeline-title">Data Science Intern</div>
+                    <div class="timeline-subtitle">Company Name</div>
+                    <div class="timeline-description">
+                        - Assisted in data analysis and visualization projects
+                        - Created reports and dashboards using Power BI
+                        - Participated in machine learning model development
+                    </div>
+                </div>
+    
+                <!-- Diğer deneyimler buraya eklenebilir -->
             </div>
         </div>
     </section>
