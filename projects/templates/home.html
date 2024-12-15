@@ -342,25 +342,6 @@
             transform: rotate(90deg);
         }
 
-        @media (max-width: 768px) {
-            .name-logo {
-                font-size: 1.5rem;
-                top: 30px;
-                left: 40px; /* Mobilde daha sola */
-            }
-    
-            .hamburger-menu {
-                top: 30px;
-                right: 20px;
-            }
-
-            .contact-wrapper {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 20px;
-            }
-        }
-
         #experience {
             background-color: #E8D8C4;
             color: #8B6B61;
@@ -429,6 +410,102 @@
             color: #6B4F44;
             line-height: 1.6;
         }
+
+        #skills {
+            background-color: #b6a48e;
+            padding: 40px 20px;
+        }
+        
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+        
+        .skills-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #6B4F44;
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #6B4F44;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            justify-items: center;
+        }
+        
+        .skill-card {
+            background-color: rgba(139, 107, 97, 0.25);
+            border-radius: 15px;
+            padding: 25px;
+            width: 250px;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            background-color: rgba(139, 107, 97, 0.35);
+        }
+        
+        .skill-icon {
+            font-size: 3rem;
+            color: #6B4F44;
+            margin-bottom: 20px;
+        }
+        
+        .skill-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: #6B4F44;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .name-logo {
+                font-size: 1.5rem;
+                top: 30px;
+                left: 40px; /* Mobilde daha sola */
+            }
+    
+            .hamburger-menu {
+                top: 30px;
+                right: 20px;
+            }
+
+            .contact-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .skills-container {
+                padding: 20px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+        
+            .skill-card {
+                width: 200px;
+                height: 200px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -445,7 +522,8 @@
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="projects/home">Projects</a>
-        <a href="#contact">Contact</a>
+        <a href="#contact">Resume</a>
+        <a href="#contact">Skills</a>
     </nav>
 
     <section id="home" class="page-section">
@@ -569,10 +647,44 @@
                     </div>
                 </div>
     
-                <!-- Diğer deneyimler buraya eklenebilir -->
             </div>
         </div>
     </section>
+
+    <section id="skills" class="page-section">
+        <div class="skills-container">
+            <h2 class="skills-title">Skills</h2>
+            <div class="skills-grid">
+                <!-- Python Card -->
+                <div class="skill-card">
+                    <i class="fab fa-python skill-icon"></i>
+                    <div class="skill-title">Python</div>
+                </div>
+                <!-- SQL Card -->
+                <div class="skill-card">
+                    <i class="fab fa-python skill-icon"></i>
+                    <div class="skill-title">SQL</div>
+                </div>
+                <!-- Java Card -->
+                <div class="skill-card">
+                    <i class="fab fa-python skill-icon"></i>
+                    <div class="skill-title">Java</div>
+                </div>
+                <!-- Django Card -->
+                <div class="skill-card">
+                    <i class="fab fa-python skill-icon"></i>
+                    <div class="skill-title">Django</div>
+                </div>
+                <!-- FastAPI Card -->
+                <div class="skill-card">
+                    <i class="fab fa-python skill-icon"></i>
+                    <div class="skill-title">FastAPI</div>
+                </div>
+                <!-- Power BI Card -->
+                <div class="skill-card">
+                    <i class="fab fa-python skill-icon"></i>
+                    <div class="skill-title">Power BI</div>
+                </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
