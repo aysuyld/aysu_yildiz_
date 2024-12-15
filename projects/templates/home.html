@@ -248,8 +248,108 @@
             text-decoration: none;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        
+
+        .name-logo {
+            position: fixed;
+            top: 40px;
+            left: 80px; /* 40px'den 80px'e çıkardım - daha merkeze yakın */
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #8B6B61;
+            text-decoration: none;
+            z-index: 1000;
+        }
+
+        .name-logo:hover {
+            color: #6B4F44;
+            text-decoration: none;
+        }
+
+        .hamburger-menu {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            z-index: 1000;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 10px;
+            background-color: rgba(232, 216, 196, 0.9);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-menu:hover {
+            background-color: rgba(139, 107, 97, 0.2);
+        }
+
+        .hamburger-line {
+            width: 25px;
+            height: 2px;
+            background-color: #8B6B61;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: rgba(139, 107, 97, 0.95); /* Menü rengini koyulaştırdım */
+            padding: 80px 40px;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .nav-menu.active {
+            right: 0;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 15px 0;
+            color: #E8D8C4; /* Link rengini açık ton yaptım */
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(232, 216, 196, 0.2); /* Çizgi rengini de açık ton yaptım */
+        }
+
+        .nav-menu a:hover {
+            color: #ffffff; /* Hover rengini beyaz yaptım */
+            padding-left: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #E8D8C4; /* Kapatma butonu rengini açık ton yaptım */
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #ffffff; /* Hover rengini beyaz yaptım */
+            transform: rotate(90deg);
+        }
+
         @media (max-width: 768px) {
+            .name-logo {
+                font-size: 1.5rem;
+                top: 30px;
+                left: 40px; /* Mobilde daha sola */
+            }
+    
+            .hamburger-menu {
+                top: 30px;
+                right: 20px;
+            }
+
             .contact-wrapper {
                 flex-direction: column;
                 align-items: flex-start;
@@ -259,12 +359,21 @@
     </style>
 </head>
 <body>
-    <div class="nav-buttons">
-        <a href="#home" class="nav-btn">Ana Sayfa</a>
-        <a href="#about" class="nav-btn">Hakkımda</a>
-        <a href="projects/home" class="nav-btn">Projeler</a>
-        <a href="#" class="nav-btn">İletişim</a>
+    <a href="#" class="name-logo">Aysu Yıldız</a>
+
+    <div class="hamburger-menu" onclick="toggleMenu()">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
     </div>
+
+    <nav class="nav-menu">
+        <div class="close-btn" onclick="toggleMenu()">×</div>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="projects/home">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
 
     <section id="home" class="page-section">
         <div class="main-container">
@@ -309,5 +418,28 @@
     </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function toggleMenu() {
+        const navMenu = document.querySelector('.nav-menu');
+        navMenu.classList.toggle('active');
+    }
+
+// Menü dışına tıklandığında menüyü kapatma
+    document.addEventListener('click', function(event) {
+        const navMenu = document.querySelector('.nav-menu');
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+    
+        if (!navMenu.contains(event.target) && !hamburgerMenu.contains(event.target) && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+        }
+    });
+
+// Menü linklerine tıklandığında menüyü kapatma
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelector('.nav-menu').classList.remove('active');
+        });
+    });
+    </script>
 </body>
 </html>
