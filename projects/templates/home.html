@@ -377,19 +377,20 @@
         
         .column {
             flex: 1;
-            background-color: rgba(139, 107, 97, 0.1);
+            background-color: rgba(139, 107, 97, 0.25); /* Arka plan rengini koyulaştırdım */
             border-radius: 20px;
             padding: 30px;
             backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Derinlik katmak için gölge ekledim */
         }
         
         .column-title {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            color: #8B6B61;
+            color: #6B4F44; /* Başlık rengini biraz koyulaştırdım */
             margin-bottom: 30px;
             text-align: center;
-            border-bottom: 2px solid #8B6B61;
+            border-bottom: 2px solid #6B4F44;
             padding-bottom: 10px;
         }
         
@@ -397,13 +398,13 @@
             margin-bottom: 30px;
             position: relative;
             padding-left: 20px;
-            border-left: 2px solid #8B6B61;
+            border-left: 2px solid #6B4F44; /* Timeline çizgisini koyulaştırdım */
         }
         
         .timeline-date {
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
-            color: #6B4F44;
+            color: #5A3F34; /* Tarih rengini koyulaştırdım */
             margin-bottom: 10px;
             font-weight: bold;
         }
@@ -411,21 +412,21 @@
         .timeline-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.2rem;
-            color: #8B6B61;
+            color: #6B4F44; /* Başlık rengini koyulaştırdım */
             margin-bottom: 10px;
         }
         
         .timeline-subtitle {
             font-family: 'Playfair Display', serif;
             font-size: 1rem;
-            color: #8B6B61;
+            color: #6B4F44;
             margin-bottom: 10px;
             font-style: italic;
         }
         
         .timeline-description {
             font-size: 0.95rem;
-            color: #8B6B61;
+            color: #6B4F44;
             line-height: 1.6;
         }
     </style>
