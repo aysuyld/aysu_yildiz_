@@ -433,18 +433,18 @@
         }
         
         .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            justify-items: center;
+            display: flex;  /* Grid yerine flex kullanıyoruz */
+            flex-wrap: wrap;  /* Kartların yan yana dizilmesi için */
+            gap: 20px;  /* Kartlar arası boşluk */
+            justify-content: center;
         }
         
         .skill-card {
             background-color: rgba(139, 107, 97, 0.25);
             border-radius: 15px;
-            padding: 25px;
-            width: 250px;
-            height: 250px;
+            padding: 20px;
+            width: 200px;  /* Kart genişliği küçültüldü */
+            height: 200px;  /* Kart yüksekliği küçültüldü */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -461,16 +461,16 @@
         }
         
         .skill-icon {
-            font-size: 3rem;
+            font-size: 2.5rem;  /* İkon boyutu küçültüldü */
             color: #6B4F44;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .skill-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
+            font-size: 1.2rem;  /* Başlık boyutu küçültüldü */
             color: #6B4F44;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-weight: bold;
         }
 
@@ -502,8 +502,8 @@
             }
         
             .skill-card {
-                width: 200px;
-                height: 200px;
+                width: 180px;  /* Mobilde daha da küçük */
+                height: 180px;
             }
         }
     </style>
@@ -662,17 +662,17 @@
                 </div>
                 <!-- SQL Card -->
                 <div class="skill-card">
-                    <i class="fab fa-python skill-icon"></i>
+                    <i class="fas fa-database skill-icon"></i>
                     <div class="skill-title">SQL</div>
                 </div>
                 <!-- Java Card -->
                 <div class="skill-card">
-                    <i class="fab fa-python skill-icon"></i>
+                    <i class="fab fa-java skill-icon"></i>
                     <div class="skill-title">Java</div>
                 </div>
                 <!-- Django Card -->
                 <div class="skill-card">
-                    <i class="fab fa-python skill-icon"></i>
+                    <i class="fas fa-code skill-icon"></i>
                     <div class="skill-title">Django</div>
                 </div>
                 <!-- FastAPI Card -->
@@ -682,7 +682,7 @@
                 </div>
                 <!-- Power BI Card -->
                 <div class="skill-card">
-                    <i class="fab fa-python skill-icon"></i>
+                    <i class="fas fa-chart-bar skill-icon"></i>
                     <div class="skill-title">Power BI</div>
                 </div>
 
