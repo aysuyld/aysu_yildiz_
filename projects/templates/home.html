@@ -252,7 +252,7 @@
         .name-logo {
             position: fixed;
             top: 40px;
-            left: 40px;
+            left: 80px; /* 40px'den 80px'e çıkardım - daha merkeze yakın */
             font-family: 'Dancing Script', cursive;
             font-size: 1.8rem;
             color: #8B6B61;
@@ -297,7 +297,7 @@
             right: -300px;
             width: 300px;
             height: 100vh;
-            background-color: rgba(232, 216, 196, 0.95);
+            background-color: rgba(139, 107, 97, 0.95); /* Menü rengini koyulaştırdım */
             padding: 80px 40px;
             transition: all 0.3s ease;
             z-index: 999;
@@ -310,16 +310,16 @@
         .nav-menu a {
             display: block;
             padding: 15px 0;
-            color: #8B6B61;
+            color: #E8D8C4; /* Link rengini açık ton yaptım */
             font-family: 'Playfair Display', serif;
             font-size: 1.2rem;
             text-decoration: none;
             transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(139, 107, 97, 0.2);
+            border-bottom: 1px solid rgba(232, 216, 196, 0.2); /* Çizgi rengini de açık ton yaptım */
         }
 
         .nav-menu a:hover {
-            color: #6B4F44;
+            color: #ffffff; /* Hover rengini beyaz yaptım */
             padding-left: 10px;
         }
 
@@ -328,14 +328,477 @@
             top: 20px;
             right: 20px;
             font-size: 1.5rem;
-            color: #8B6B61;
+            color: #E8D8C4; /* Kapatma butonu rengini açık ton yaptım */
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .close-btn:hover {
-            color: #6B4F44;
+            color: #ffffff; /* Hover rengini beyaz yaptım */
             transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .name-logo {
+                font-size: 1.5rem;
+                top: 30px;
+                left: 40px; /* Mobilde daha sola */
+            }
+    
+            .hamburger-menu {
+                top: 30px;
+                right: 20px;
+            }
+
+            .contact-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="#" class="name-logo">Aysu Yıldız</a>
+
+    <div class="hamburger-menu" onclick="toggleMenu()">
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+        <div class="hamburger-line"></div>
+    </div>
+
+    <nav class="nav-menu">
+        <div class="close-btn" onclick="toggleMenu()">×</div>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="projects/home">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="home" class="page-section">
+        <div class="main-container">
+            <div class="content-left">
+                <h1 class="name-title">I'm Aysu Yıldız</h1>
+                <h2 class="role-title">Data Engineer</h2>
+                <div class="contact-wrapper">
+                    <div class="lets-talk-text">
+                        Contact Me
+                        <span class="arrow">→</span>
+                    </div>
+                    <a href="mailto:contact@aysuyildiz.com" class="mail-btn">
+                        <i class="fas fa-envelope"></i>
+                        <span>aysu.yildiz361@gmail.com</span>
+                    </a>
+                </div>
+            </div>
+            <div class="content-right">
+                <img src="{% static 'images/profile.jpg' %}" alt="Aysu Yıldız" class="profile-image">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="page-section">
+        <div class="about-content">
+            <h3 class="who-title">Who am i?</h3>
+            <h2 class="about-heading">I'm Aysu Yıldız, a Python Developer and Data Scientist.</h2>
+            <p class="about-text"> 
+                Experienced in organizing, analyzing, and modeling data using Python. Recently specialized in areas such as Natural Language Processing (NLP), 
+                TensorFlow, and Machine Learning through certified training programs. Participated in competitions on platforms like Datathon and Kaggle, 
+                gaining hands-on experience. During this process, completed projects such as Leaf Disease Detection, Customer Churn Prediction, 
+                and House Price Prediction. Acquired various infrastructure skills by working with platforms like FastAPI and Flask. 
+                Experienced in database management and data analysis using SQL. Adaptable to teamwork, highly skilled in problem-solving, and eager to learn.
+            </p>
+            <div class="text-center">
+                <a href="{% static 'cv/Cv_Aysu_Yildiz.pdf' %}" download class="cv-download-btn">
+                    <i class="fas fa-download me-2"></i>
+                    Download my CV
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function toggleMenu() {
+        const navMenu = document.querySelector('.nav-menu');
+        navMenu.classList.toggle('active');
+    }
+
+// Menü dışına tıklandığında menüyü kapatma
+    document.addEventListener('click', function(event) {
+        const navMenu = document.querySelector('.nav-menu');
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+    
+        if (!navMenu.contains(event.target) && !hamburgerMenu.contains(event.target) && navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+        }
+    });
+
+// Menü linklerine tıklandığında menüyü kapatma
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelector('.nav-menu').classList.remove('active');
+        });
+    });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Aysu Yıldız</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% load static %}
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Dancing+Script:wght@400;600&display=swap');
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .page-section {
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        #home {
+            background-color: #E8D8C4;
+            color: #8B6B61;
+        }
+
+        #about {
+            background-color: #b6a48e; /* Açık pembe tonu */
+            color: #8B6B61;
+            padding: 40px 20px;
+        }
+
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 50px;
+            margin-top: 300px; /* 150px'den 250px'e çıkardım */
+        }
+
+        .content-left {
+            flex: 1;
+            padding-right: 50px;
+        }
+
+        .name-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            color: #8B6B61;
+        }
+
+        .role-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #8B6B61;
+        }
+
+        .profile-image {
+            width: 300px; /* Fotoğraf boyutunu küçülttüm */
+            height: 300px; /* Fotoğraf boyutunu küçülttüm */
+            border-radius: 50%;
+            object-fit: cover;
+            border: 8px solid #8B6B61;
+        }
+
+        .nav-buttons {
+            position: fixed;
+            left: 50%;
+            top: 40px;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 25px; /* Butonlar arası mesafeyi artırdım */
+            z-index: 1000;
+            background-color: rgba(232, 216, 196, 0.9); /* Navigasyon arka planı */
+            padding: 15px 30px;
+            border-radius: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn {
+            background-color: rgba(139, 107, 97, 0.2);
+            color: #8B6B61;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Playfair Display', serif;
+            backdrop-filter: blur(5px);
+            font-size: 1.1rem;
+        }
+
+        .nav-btn:hover {
+            background-color: #8B6B61;
+            color: #E8D8C4;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        .about-content {
+            max-width: 1000px;
+            width: 90%;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: #D4BFA7; /* Hakkımda arkaplan rengini koyulaştırdım */
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .about-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #8B6B61;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .about-text {
+            color: #8B6B61;
+            font-family: 'Playfair Display', serif;
+            line-height: 1.8;
+            text-align: justify;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 992px) {
+            .main-container {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+                margin-top: 180px; /* Mobil görünüm için de artırdım */
+            }
+
+            .content-left {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+
+            .profile-image {
+                width: 250px; /* Mobilde daha küçük */
+                height: 250px;
+            }
+
+            .name-title {
+                font-size: 3.5rem;
+            }
+
+            .role-title {
+                font-size: 2rem;
+            }
+
+            .nav-buttons {
+                padding: 10px 20px;
+                gap: 15px;
+            }
+
+            .nav-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+        }
+
+        .cv-download-btn {
+            background-color: #8B6B61;
+            color: #E8D8C4;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin-top: 30px;
+            border: none;
+        }
+        
+        .cv-download-btn:hover {
+            background-color: #6B4F44;
+            transform: translateY(-2px);
+            color: #E8D8C4;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .text-center {
+            text-align: center;
+        }
+
+        .contact-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .lets-talk-text {
+            color: #8B6B61;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: moveText 1.5s ease-in-out infinite;
+        }
+        
+        .arrow {
+            display: inline-block;
+        }
+        
+        @keyframes moveText {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(10px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+        
+        .mail-btn {
+            background-color: #8B6B61;
+            color: #E8D8C4;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .mail-btn:hover {
+            background-color: #6B4F44;
+            transform: translateY(-2px);
+            color: #E8D8C4;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .name-logo {
+            position: fixed;
+            top: 40px;
+            left: 80px; /* 40px'den 80px'e çıkardım - daha merkeze yakın */
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #8B6B61;
+            text-decoration: none;
+            z-index: 1000;
+        }
+
+        .name-logo:hover {
+            color: #6B4F44;
+            text-decoration: none;
+        }
+
+        .hamburger-menu {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            z-index: 1000;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 10px;
+            background-color: rgba(232, 216, 196, 0.9);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-menu:hover {
+            background-color: rgba(139, 107, 97, 0.2);
+        }
+
+        .hamburger-line {
+            width: 25px;
+            height: 2px;
+            background-color: #8B6B61;
+            transition: all 0.3s ease;
+        }
+
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: rgba(139, 107, 97, 0.95); /* Menü rengini koyulaştırdım */
+            padding: 80px 40px;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .nav-menu.active {
+            right: 0;
+        }
+
+        .nav-menu a {
+            display: block;
+            padding: 15px 0;
+            color: #E8D8C4; /* Link rengini açık ton yaptım */
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(232, 216, 196, 0.2); /* Çizgi rengini de açık ton yaptım */
+        }
+
+        .nav-menu a:hover {
+            color: #ffffff; /* Hover rengini beyaz yaptım */
+            padding-left: 10px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: #E8D8C4; /* Kapatma butonu rengini açık ton yaptım */
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #ffffff; /* Hover rengini beyaz yaptım */
+            transform: rotate(90deg);
+        }
+
+        @media (max-width: 768px) {
+            .name-logo {
+                font-size: 1.5rem;
+                top: 30px;
+                left: 40px; /* Mobilde daha sola */
+            }
+    
+            .hamburger-menu {
+                top: 30px;
+                right: 20px;
+            }
+
+            .contact-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
         }
     </style>
 </head>
