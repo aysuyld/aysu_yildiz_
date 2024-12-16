@@ -131,47 +131,6 @@
             font-size: 1.1rem;
         }
 
-        @media (max-width: 992px) {
-            .main-container {
-                flex-direction: column;
-                text-align: center;
-                padding: 20px;
-                margin-top: 180px; /* Mobil görünüm için de artırdım */
-            }
-
-            .content-left {
-                padding-right: 0;
-                margin-bottom: 40px;
-            }
-
-            .profile-image {
-                width: 250px; /* Mobilde daha küçük */
-                height: 250px;
-            }
-
-            .name-title {
-                font-size: 3.5rem;
-            }
-
-            .role-title {
-                font-size: 2rem;
-            }
-
-            .nav-buttons {
-                padding: 10px 20px;
-                gap: 15px;
-            }
-
-            .nav-btn {
-                padding: 8px 15px;
-                font-size: 0.9rem;
-            }
-            .experience-container {
-                flex-direction: column;
-                padding: 20px;
-            }
-        }
-
         .cv-download-btn {
             background-color: #8B6B61;
             color: #E8D8C4;
@@ -485,25 +444,190 @@
                 top: 30px;
                 right: 20px;
             }
+        }
 
-            .contact-wrapper {
+        @media (max-width: 768px) {
+            /* Ana sayfa mobil ayarları */
+            .main-container {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 20px;
-            }
-
-            .skills-container {
-                padding: 20px;
-            }
-            
-            .skills-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                text-align: center;
+                padding: 10px;
+                margin-top: 120px;
                 gap: 20px;
             }
         
+            .content-left {
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+        
+            .name-title {
+                font-size: 2.8rem;
+                margin-bottom: 10px;
+            }
+        
+            .role-title {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+        
+            .profile-image {
+                width: 200px;
+                height: 200px;
+                border-width: 6px;
+            }
+        
+            /* Navigasyon menüsü mobil ayarları */
+            .nav-menu {
+                width: 250px; /* Menü genişliğini azalttım */
+                padding: 60px 25px;
+            }
+        
+            .nav-menu a {
+                font-size: 1.1rem;
+                padding: 12px 0;
+            }
+        
+            /* Experience section mobil ayarları */
+            .experience-container {
+                flex-direction: column;
+                padding: 15px;
+                gap: 25px;
+            }
+        
+            .column {
+                padding: 20px;
+            }
+        
+            .column-title {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+        
+            .timeline-date {
+                font-size: 1rem;
+            }
+        
+            .timeline-title {
+                font-size: 1.1rem;
+            }
+        
+            .timeline-subtitle {
+                font-size: 0.9rem;
+            }
+        
+            .timeline-description {
+                font-size: 0.85rem;
+            }
+        
+            .timeline-item {
+                margin-bottom: 20px;
+                padding-left: 15px;
+            }
+        
+            /* Skills section mobil ayarları */
+            .skills-container {
+                padding: 15px;
+            }
+        
+            .skills-title {
+                font-size: 1.8rem;
+                margin-bottom: 30px;
+            }
+        
+            .skills-grid {
+                gap: 15px;
+            }
+        
             .skill-card {
-                width: 180px;  /* Mobilde daha da küçük */
+                width: 150px; /* Kartları daha da küçülttüm */
+                height: 150px;
+                padding: 15px;
+            }
+        
+            .skill-icon {
+                font-size: 2rem;
+                margin-bottom: 10px;
+            }
+        
+            .skill-title {
+                font-size: 1rem;
+                margin-bottom: 8px;
+            }
+        
+            .skill-description {
+                font-size: 0.8rem;
+                line-height: 1.3;
+            }
+        
+            /* Contact wrapper mobil ayarları */
+            .contact-wrapper {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+        
+            .lets-talk-text {
+                font-size: 1.2rem;
+            }
+        
+            .mail-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        
+            /* Genel padding ve margin ayarları */
+            .page-section {
+                padding: 20px 10px;
+            }
+        }
+        
+        /* Daha küçük ekranlar için ek ayarlar */
+        @media (max-width: 480px) {
+            .name-title {
+                font-size: 2.5rem;
+            }
+        
+            .role-title {
+                font-size: 1.5rem;
+            }
+        
+            .profile-image {
+                width: 180px;
                 height: 180px;
+            }
+        
+            .skill-card {
+                width: 140px;
+                height: 140px;
+            }
+        
+            .column {
+                padding: 15px;
+            }
+        
+            .timeline-description {
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Yatay mobil görünüm için ayarlar */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .main-container {
+                margin-top: 100px;
+            }
+        
+            .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+        
+            .name-title {
+                font-size: 2.2rem;
+            }
+        
+            .role-title {
+                font-size: 1.4rem;
             }
         }
     </style>
