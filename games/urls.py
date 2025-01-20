@@ -8,7 +8,8 @@ from . import auth_views
 
 urlpatterns = [
     # Web URLs
-    path('', views.HomeView.as_view(), name='home'),
+    path('', views.base_view, name='base'),
+    path('home', views.HomeView.as_view(), name='home'),
     path('register/', auth_views.register_view, name='register'),
     path('login/', auth_views.login_view, name='login'),
     path('logout/', auth_views.logout_view, name='logout'),
