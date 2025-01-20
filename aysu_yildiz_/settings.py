@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
     'channels',  # WebSocket desteği için gerekli
     'rest_framework',
-    "projects"
+    "projects",
+    "games"
 ]
 
 MIDDLEWARE = [

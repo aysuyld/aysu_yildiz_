@@ -1,0 +1,11 @@
+{% extends "home/base.html" %}
+
+{% block title %}Logged Out{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2>Başarıyla çıkış yaptınız</h2>
+    <p>Güvenli bir şekilde çıkış yapıldı.</p>
+    <p><a href="{% url 'login' %}" class="button">Tekrar Giriş Yap</a></p>
+</div>
+{% endblock %}

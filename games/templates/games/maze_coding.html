@@ -1,0 +1,602 @@
+<!-- templates/games/maze_coding.html -->
+{% extends "home/base.html" %}
+
+{% block content %}
+<div class="game-container">
+    <div class="game-header">
+        <h1>Kod ile Labirenti Geç 🎮</h1>
+        <div class="level-info">
+            <span>Seviye: <span id="currentLevel">1</span> / <span id="totalLevels">50</span></span>
+            <span>⭐ Yıldız: <span id="stars">0</span></span>
+        </div>
+    </div>
+
+    <div class="game-content">
+        <!-- Sol taraf: Kod yazma alanı -->
+        <div class="code-section">
+            <div class="code-editor">
+                <h3>Kodunu Yaz:</h3>
+                <div class="code-help">
+                    <p>Kullanılabilir Komutlar:</p>
+                    <ul>
+                        <li><code>move_forward(n)</code> - n adım ileri git (1-5 arası)</li>
+                        <li><code>turn_left()</code> - sola dön</li>
+                        <li><code>turn_right()</code> - sağa dön</li>
+                    </ul>
+                </div>
+                <div class="code-input-container">
+                    <pre id="lineNumbers">1</pre>
+                    <textarea id="codeInput" class="code-input" 
+                              placeholder="Örnek:
+move_forward(2)
+turn_right()
+move_forward(3)"></textarea>
+                </div>
+                <div class="control-buttons">
+                    <button onclick="runCode()" class="run-btn">
+                        <i class="fas fa-play"></i> Çalıştır
+                    </button>
+                    <button onclick="resetGame()" class="reset-btn">
+                        <i class="fas fa-undo"></i> Baştan Başla
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sağ taraf: Labirent -->
+        <div class="maze-section">
+            <div class="maze-grid" id="mazeGrid">
+                <!-- Labirent JavaScript ile oluşturulacak -->
+            </div>
+            <div class="level-description">
+                <h3>Görev:</h3>
+                <p id="levelDescription"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .game-container {
+        padding: 20px;
+        background: linear-gradient(135deg, #6366F1, #8B5CF6);
+        min-height: calc(100vh - 60px);
+        color: white;
+        width: 100%;
+    }
+
+    .game-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .level-info {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        font-size: 1.2rem;
+    }
+
+    .game-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .code-section {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+    }
+
+    .code-help {
+        background: rgba(255, 255, 255, 0.1);
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    .code-help code {
+        background: rgba(0, 0, 0, 0.2);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+    }
+
+    .code-input-container {
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 8px;
+        margin-bottom: 15px;
+        display: flex;
+    }
+
+    #lineNumbers {
+        padding: 10px;
+        color: #888;
+        text-align: right;
+        border-right: 1px solid #444;
+        user-select: none;
+    }
+
+    .code-input {
+        flex: 1;
+        background: transparent;
+        border: none;
+        color: #fff;
+        font-family: monospace;
+        font-size: 14px;
+        padding: 10px;
+        resize: none;
+        outline: none;
+        height: 150px;
+    }
+
+    .control-buttons {
+        display: flex;
+        gap: 10px;
+    }
+
+    .run-btn, .reset-btn {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .run-btn {
+        background: #4CAF50;
+        color: white;
+    }
+
+    .reset-btn {
+        background: #f44336;
+        color: white;
+    }
+
+    .maze-section {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+    }
+
+    .maze-grid {
+        display: grid;
+        grid-template-columns: repeat(8, 50px);
+        grid-template-rows: repeat(8, 50px);
+        gap: 2px;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        width: fit-content;
+        margin: 0 auto;
+    }
+
+    .maze-cell {
+        width: 50px;
+        height: 50px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .wall {
+        background: #444;
+        border: 1px solid #666;
+    }
+
+    .character {
+        width: 40px;
+        height: 40px;
+        background: #FF69B4;
+        border-radius: 50%;
+        position: relative;
+        transition: all 0.3s;
+    }
+
+    .character::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background: white;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 50%;
+    }
+
+    .target {
+        background: #FFD700;
+        clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    @media (max-width: 1200px) {
+        .game-content {
+            grid-template-columns: 1fr;
+        }
+
+        .maze-grid {
+            margin: 20px auto;
+        }
+    }
+</style>
+
+<script>
+// Otomatik Seviye Üreteci
+class MazeGenerator {
+    constructor(width, height) {
+        this.width = width;
+        this.height = height;
+    }
+
+    generateMaze(difficulty) {
+        const grid = Array(this.height).fill().map(() => Array(this.width).fill(0));
+        
+        // Dış duvarları ekle
+        for (let i = 0; i < this.width; i++) {
+            grid[0][i] = 1;
+            grid[this.height-1][i] = 1;
+        }
+        for (let i = 0; i < this.height; i++) {
+            grid[i][0] = 1;
+            grid[i][this.width-1] = 1;
+        }
+
+        // Rastgele duvarlar ekle
+        const wallCount = Math.floor((difficulty * 20) + 5);
+        for (let i = 0; i < wallCount; i++) {
+            const x = Math.floor(Math.random() * (this.width - 2)) + 1;
+            const y = Math.floor(Math.random() * (this.height - 2)) + 1;
+            if (!(x === 1 && y === 1)) { // Başlangıç noktasına duvar koymayı engelle
+                grid[y][x] = 1;
+            }
+        }
+
+        // Başlangıç noktası
+        grid[1][1] = 'S';
+        
+        // Bitiş noktası için uygun yer bul
+        let finishX, finishY;
+        do {
+            finishX = Math.floor(Math.random() * (this.width - 2)) + 1;
+            finishY = Math.floor(Math.random() * (this.height - 2)) + 1;
+        } while (grid[finishY][finishX] === 1 || (finishX === 1 && finishY === 1));
+        
+        grid[finishY][finishX] = 'F';
+
+        // Yol kontrolü yap ve gerekirse yeniden oluştur
+        if (!this.hasValidPath(grid)) {
+            return this.generateMaze(difficulty);
+        }
+
+        return {
+            grid: grid,
+            description: `Labirenti çöz!`,
+            startDirection: 'right',
+            hint: "İpucu: Yolu dikkatlice planla!"
+        };
+    }
+
+    hasValidPath(grid) {
+        const start = { x: 1, y: 1 };
+        let finish;
+
+        // Bitiş noktasını bul
+        for (let y = 0; y < this.height; y++) {
+            for (let x = 0; x < this.width; x++) {
+                if (grid[y][x] === 'F') {
+                    finish = { x, y };
+                    break;
+                }
+            }
+            if (finish) break;
+        }
+
+        // BFS ile yol kontrolü
+        const queue = [start];
+        const visited = new Set();
+        
+        while (queue.length > 0) {
+            const current = queue.shift();
+            const key = `${current.x},${current.y}`;
+            
+            if (current.x === finish.x && current.y === finish.y) {
+                return true;
+            }
+            
+            if (visited.has(key)) continue;
+            visited.add(key);
+            
+            // Komşu hücreleri kontrol et
+            const neighbors = [
+                {x: current.x + 1, y: current.y},
+                {x: current.x - 1, y: current.y},
+                {x: current.x, y: current.y + 1},
+                {x: current.x, y: current.y - 1}
+            ];
+            
+            for (let neighbor of neighbors) {
+                if (neighbor.x >= 0 && neighbor.x < this.width &&
+                    neighbor.y >= 0 && neighbor.y < this.height &&
+                    grid[neighbor.y][neighbor.x] !== 1) {
+                    queue.push(neighbor);
+                }
+            }
+        }
+        
+        return false;
+    }
+}
+
+// Oyun durumu
+let currentLevel = 0;
+let totalStars = 0;
+let characterPos = { x: 1, y: 1, direction: 'right' };
+let levels = [];
+const mazeGenerator = new MazeGenerator(8, 8);
+
+// Oyunu başlat
+function initializeGame() {
+    generateLevels(50); // İlk 50 seviyeyi oluştur
+    loadLevel(currentLevel);
+    updateUI();
+}
+
+// Seviyeleri oluştur
+function generateLevels(count) {
+    levels = [];
+    for (let i = 0; i < count; i++) {
+        const difficulty = Math.min(0.8, i * 0.05);
+        const level = mazeGenerator.generateMaze(difficulty);
+        levels.push(level);
+    }
+}
+
+// Seviye yükle
+function loadLevel(levelIndex) {
+    if (levelIndex >= levels.length) {
+        // Yeni seviyeler ekle
+        const newLevelCount = 20;
+        const currentLevelCount = levels.length;
+        for (let i = 0; i < newLevelCount; i++) {
+            const difficulty = Math.min(0.8, (currentLevelCount + i) * 0.05);
+            const level = mazeGenerator.generateMaze(difficulty);
+            levels.push(level);
+        }
+    }
+
+    characterPos = { x: 1, y: 1, direction: 'right' };
+    updateMaze();
+    document.getElementById('currentLevel').textContent = levelIndex + 1;
+    document.getElementById('levelDescription').textContent = levels[levelIndex].description;
+    document.getElementById('totalLevels').textContent = levels.length;
+}
+
+// Labirenti güncelle
+function updateMaze() {
+    const maze = document.getElementById('mazeGrid');
+    const level = levels[currentLevel];
+    maze.innerHTML = '';
+    
+    level.grid.forEach((row, y) => {
+        row.forEach((cell, x) => {
+            const cellDiv = document.createElement('div');
+            cellDiv.className = 'maze-cell';
+            
+            if (cell === 1) {
+                cellDiv.classList.add('wall');
+            } else if (cell === 'F') {
+                cellDiv.classList.add('target');
+            }
+            
+            if (x === characterPos.x && y === characterPos.y) {
+                const character = document.createElement('div');
+                character.className = 'character';
+                character.style.transform = `rotate(${getRotation()}deg)`;
+                cellDiv.appendChild(character);
+            }
+            
+            maze.appendChild(cellDiv);
+        });
+    });
+}
+
+// Karakter yönünü hesapla
+function getRotation() {
+    const rotations = {
+        'right': 0,
+        'down': 90,
+        'left': 180,
+        'up': 270
+    };
+    return rotations[characterPos.direction];
+}
+
+// Kodu çalıştır
+async function runCode() {
+    const codeInput = document.getElementById('codeInput');
+    const code = codeInput.value.trim();
+    
+    if (code === '') {
+        alert('Lütfen kod yazın!');
+        return;
+    }
+
+    const runButton = document.querySelector('.run-btn');
+    runButton.disabled = true;
+
+    try {
+        const lines = code.split('\n');
+        for (let line of lines) {
+            line = line.trim();
+            if (line === '') continue;
+
+            if (line.startsWith('move_forward')) {
+                const match = line.match(/move_forward\((\d+)\)/);
+                if (!match) throw new Error('Geçersiz move_forward komutu');
+                const steps = parseInt(match[1]);
+                if (steps < 1 || steps > 5) throw new Error('Adım sayısı 1-5 arasında olmalı');
+                await moveForward(steps);
+            }
+            else if (line === 'turn_left()') {
+                turnLeft();
+                await sleep(500);
+            }
+            else if (line === 'turn_right()') {
+                turnRight();
+                await sleep(500);
+            }
+            else {
+                throw new Error('Geçersiz komut: ' + line);
+            }
+        }
+
+        // Kod başarıyla çalıştıktan sonra kod alanını temizle
+        codeInput.value = '';
+
+        checkWin();
+    } catch (error) {
+        alert('Hata: ' + error.message);
+        // Hata durumunda da kod alanını temizle
+        codeInput.value = '';
+    }
+
+    runButton.disabled = false;
+}
+
+// İleri git
+async function moveForward(steps) {
+    for (let i = 0; i < steps; i++) {
+        const newPos = {...characterPos};
+        switch(characterPos.direction) {
+            case 'right': newPos.x++; break;
+            case 'left': newPos.x--; break;
+            case 'up': newPos.y--; break;
+            case 'down': newPos.y++; break;
+        }
+        
+        if (isValidMove(newPos)) {
+            characterPos = newPos;
+            updateMaze();
+            await sleep(500);
+        } else {
+            throw new Error('Bu yöne gidemezsin! Duvar var.');
+        }
+    }
+}
+
+// Sola dön
+function turnLeft() {
+    const directions = ['right', 'up', 'left', 'down'];
+    const currentIndex = directions.indexOf(characterPos.direction);
+    characterPos.direction = directions[(currentIndex + 1) % 4];
+    updateMaze();
+}
+
+// Sağa dön
+function turnRight() {
+    const directions = ['right', 'down', 'left', 'up'];
+    const currentIndex = directions.indexOf(characterPos.direction);
+    characterPos.direction = directions[(currentIndex + 1) % 4];
+    updateMaze();
+}
+
+// Geçerli hareket kontrolü
+function isValidMove(pos) {
+    const level = levels[currentLevel];
+    return pos.x >= 0 && pos.x < 8 && 
+           pos.y >= 0 && pos.y < 8 && 
+           level.grid[pos.y][pos.x] !== 1;
+}
+
+// Kazanma kontrolü
+function checkWin() {
+    const level = levels[currentLevel];
+    if (level.grid[characterPos.y][characterPos.x] === 'F') {
+        const stars = calculateStars();
+        totalStars += stars;
+        
+        const message = `
+            Tebrikler! Seviye ${currentLevel + 1} tamamlandı!
+            Kazanılan Yıldız: ${'⭐'.repeat(stars)}
+            
+            Sonraki seviyeye geçmek için OK tuşuna bas!
+        `;
+        
+        alert(message);
+        currentLevel++;
+        loadLevel(currentLevel);
+        saveProgress();
+        updateUI();
+    }
+}
+
+// Yıldız hesapla
+function calculateStars() {
+    const commandCount = document.getElementById('codeInput').value.split('\n').filter(line => line.trim()).length;
+    if (commandCount <= 5) return 3;
+    if (commandCount <= 8) return 2;
+    return 1;
+}
+
+// Oyunu sıfırla
+function resetGame() {
+    loadLevel(currentLevel);
+    document.getElementById('codeInput').value = '';
+}
+
+// İlerlemeyi kaydet
+function saveProgress() {
+    if (typeof(Storage) !== "undefined") {
+        localStorage.setItem('mazeGameProgress', JSON.stringify({
+            currentLevel,
+            totalStars
+        }));
+    }
+}
+
+// İlerlemeyi yükle
+function loadProgress() {
+    if (typeof(Storage) !== "undefined") {
+        const progress = JSON.parse(localStorage.getItem('mazeGameProgress'));
+        if (progress) {
+            currentLevel = progress.currentLevel;
+            totalStars = progress.totalStars;
+            loadLevel(currentLevel);
+            updateUI();
+        }
+    }
+}
+
+// Arayüzü güncelle
+function updateUI() {
+    document.getElementById('currentLevel').textContent = currentLevel + 1;
+    document.getElementById('stars').textContent = totalStars;
+    document.getElementById('totalLevels').textContent = levels.length;
+}
+
+// Yardımcı fonksiyon: Bekle
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// Oyunu başlat
+window.onload = function() {
+    initializeGame();
+    loadProgress();
+};
+</script>
+{% endblock %}

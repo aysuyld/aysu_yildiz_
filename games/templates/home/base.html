@@ -1,0 +1,138 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Learning Code-Base{% endblock %}</title>
+    {% load static %}
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .navbar-nav {
+            flex-direction: row !important;
+            gap: 20px;
+        }
+
+        .navbar {
+            padding: 15px 30px;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,1) !important;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: rgba(255,255,255,1) !important;
+        }
+
+        .navbar-nav .active > .nav-link {
+            color: #007bff !important;
+            font-weight: bold;
+        }
+        
+        .alert {
+            margin-bottom: 1rem;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            background-color: transparent;  /* Arka plan rengini kaldır */
+        }
+    
+        .alert-success {
+            background-color: rgba(212, 237, 218, 0.9);  /* Yarı saydam yeşil */
+            color: #155724;
+        }
+    
+        .alert-error, .alert-danger {
+            background-color: rgba(248, 215, 218, 0.9);  /* Yarı saydam kırmızı */
+            color: #721c24;
+        }
+    
+        .alert-warning {
+            background-color: rgba(255, 243, 205, 0.9);  /* Yarı saydam sarı */
+            color: #856404;
+        }
+    
+        .alert-info {
+            background-color: rgba(209, 236, 241, 0.9);  /* Yarı saydam mavi */
+            color: #0c5460;
+        }
+
+        .btn-close {
+            padding: 12px;
+            opacity: 0.5;
+        }
+    
+        .btn-close:hover {
+            opacity: 1;
+        }
+
+        /* Responsive ayarlar */
+        @media (max-width: 768px) {
+            .navbar-nav {
+                margin-top: 10px;
+                gap: 10px;
+            }
+
+            .message-container {
+                left: 20px;  /* Mobilde her iki yandan boşluk */
+                right: 20px;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="{% if user.is_authenticated %}{% url 'home' %}{% else %}{% url 'index' %}{% endif %}">
+                Learning Code
+            </a>
+            <ul class="navbar-nav">
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <span class="nav-link">Welcome, {{ user.username }}!</span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'profile' %}" class="nav-link">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                    </li>
+                    
+                {% else %}
+                    <li class="nav-item">
+                        <a href="{% url 'login' %}" class="nav-link">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'register' %}" class="nav-link">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
